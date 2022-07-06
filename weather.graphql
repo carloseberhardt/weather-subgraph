@@ -1,0 +1,55 @@
+type Clouds {
+  all: Int
+}
+type Coord {
+  lat: Float
+  lon: Float
+}
+type Main {
+  feels_like: Float
+  humidity: Int
+  pressure: Int
+  temp: Float
+  temp_max: Float
+  temp_min: Float
+}
+type Sys {
+  country: String
+  id: Int
+  sunrise: Int
+  sunset: Int
+  type: Int
+}
+type Weather {
+  base: String
+  clouds: Clouds
+  cod: Int
+  coord: Coord
+  dt: Int
+  id: Int
+  main: Main
+  name: String
+  sys: Sys
+  timezone: Int
+  visibility: Int
+  weather: [WeatherEntry]
+  wind: Wind
+}
+type WeatherEntry {
+  description: String
+  icon: Float
+  id: Int
+  main: String
+}
+type Wind {
+  deg: Int
+  speed: Float
+}
+
+type Query {
+  weather(q: String!): Weather
+    @rest(
+      endpoint: "https://api.openweathermap.org/data/2.5/weather?units=imperial&appid=$apikey&q=$q"
+      configuration: "openweathermap"
+      )
+}

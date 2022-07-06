@@ -1,0 +1,3 @@
+schema @sdl(files: ["weather.graphql"]) {
+  query: Query
+}
