@@ -1,4 +1,4 @@
-
+## Front matter -- these should change for a new project
 ## the graph name for this project
 GRAPH=weather
 ## stepzen API key for logged in account
@@ -11,8 +11,8 @@ ENDPOINT=${ENV}/${GRAPH}
 ACCOUNT=chico
 
 ## define the subgraphs to import for testing, empty for none
-##IMPORTS=orders customers
-orders customers: stepzen.config.json
+IMPORTS=orders customers
+${IMPORTS}: stepzen.config.json
 	$(import-subgraph)
 
 define import-subgraph
@@ -20,7 +20,7 @@ define import-subgraph
 	@stepzen import graphql --name=$@ --header "Authorization: apikey ${APIKEY}" "https://${ACCOUNT}.stepzen.net/${ENV}/$@/__graphql"
 endef
 
-
+## Standard rules -- these should not change
 .PHONY: help import start clean $(IMPORTS)
 help: ## Display this help screen
 	@grep -E '^[a-z.A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST)  | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-10s\033[0m %s\n", $$1, $$2}'
