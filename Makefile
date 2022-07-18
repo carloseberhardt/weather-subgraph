@@ -40,14 +40,8 @@ start: stepzen.config.json ## deploy schema and run local proxy for testing
 
 
 deploy: stepzen.config.json ## upload and deploy schema and configuration
-ifneq ("$(wildcard config.yaml)","")
-	@echo "uploading configurationset..."
-	stepzen upload configurationset ${ENDPOINT} --file=config.yaml
-endif
-	@echo "uploading schema..."
-	stepzen upload schema ${ENDPOINT} --dir=.
 	@echo "deploying schema to ${ENDPOINT}..."
-	stepzen deploy --schema=${ENDPOINT} ${ENDPOINT}
+	stepzen deploy ${ENDPOINT}
 
 
 clean: ## remove all external schemas specified in IMPORTS
